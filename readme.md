@@ -4,6 +4,7 @@
 ## Visão geral
 
 O pacote log implementa um pacote de registro simples. Ele define um tipo, Logger , com métodos para formatar a saída. Ele também tem um Logger 'padrão' predefinido acessível por meio de funções auxiliares Print[f|ln], Fatal[f|ln] e Panic[f|ln], que são mais fáceis de usar do que criar um Logger manualmente. Esse logger grava no erro padrão e imprime a data e a hora de cada mensagem registrada. Cada mensagem de log é gerada em uma linha separada: se a mensagem que está sendo impressa não terminar em uma nova linha, o logger adicionará uma. As funções Fatal chamam os.Exit (1) após escrever a mensagem de log. As funções Panic chamam panic após escrever a mensagem de log.
+ref.: [https://pkg.go.dev/log](https://pkg.go.dev/log)
 
 ## Como usar
 
@@ -108,11 +109,12 @@ if err != nil {
 
 
 ## Conclusão
+Utilize as boas práticas para construir um código limpo com mensagens de log úteis para depuração! 😊
 
-Use `log.Printf` para mensagens formatadas.
+- Use `log.Printf` para mensagens formatadas.
 
-Use `log.Println` para mensagens simples.
+- Use `log.Println` para mensagens simples.
 
-Reserve `log.Fatal`/`log.Fatalf` para erros críticos no main ou pontos de entrada.
+- Reserve `log.Fatal`/`log.Fatalf` para erros críticos no main ou pontos de entrada.
 
-Evite `log.Panic` em código de produção.
+- Evite `log.Panic` em código de produção.
