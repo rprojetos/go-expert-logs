@@ -108,13 +108,36 @@ if err != nil {
 *`Saída: Erro inesperado: ...`*
 
 
-## Conclusão
+## Conclusão para log
 Utilize as boas práticas para construir um código limpo com mensagens de log úteis para depuração! 😊
 
-- Use `log.Printf` para mensagens formatadas.
-
 - Use `log.Println` para mensagens simples.
+
+- Use `log.Printf` para mensagens formatadas.
 
 - Reserve `log.Fatal`/`log.Fatalf` para erros críticos no main ou pontos de entrada.
 
 - Evite `log.Panic` em código de produção.
+
+## Conclusão no tratamento de erros
+
+- Prefira retornar error:
+Funções comuns devem retornar erros para que o caller decida como tratá-los.
+Formatação de uma mensagem de erro, para rastreabilidade:
+    - fmt.Errorf("erro ao processar configuração: %w", err) 
+    - as mensagens de erro a serem retornados deve ser lower case.
+
+- Use log.Fatal() apenas no main:
+    - Decisões de encerrar o programa devem ficar restritas ao ponto de entrada.
+
+- Evite panic() em bibliotecas:
+    - Bibliotecas não devem forçar a saída do programa. Sempre retorne error.
+
+- Use recover() apenas em casos específicos:
+    - Exemplo: Em servidores HTTP, para evitar que um panico derrube todo o serviço.
+
+- log.Fatal(): Para erros críticos na inicialização (só no main).
+
+- log.Panic(): Quase nunca (use retorno de error).
+
+- panic(): Para bugs ou estados inválidos nunca esperados.
